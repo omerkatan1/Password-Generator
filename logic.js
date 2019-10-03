@@ -3,6 +3,17 @@
 
 var passwordLength = prompt("Choose the length of your password");
 var passwordLengthInt = parseInt(passwordLength);
+// var characterTypeSpecial = confirm("Press OK if you would like any special characters in your password");
+// var characterTypeNumeric = confirm("Press OK if you would like any numbers in your password");
+// var characterTypeUppercase = confirm("Press OK if you would like any uppercase characters");
+// var characterTypeLowercase = confirm("Press OK if you would like any lowercase characters");
+
+
+
+if (passwordLengthInt > 8 && passwordLengthInt < 128) {
+
+
+
 var characterTypeSpecial = confirm("Press OK if you would like any special characters in your password");
 var characterTypeNumeric = confirm("Press OK if you would like any numbers in your password");
 var characterTypeUppercase = confirm("Press OK if you would like any uppercase characters");
@@ -17,33 +28,49 @@ var character = {
     "lowercase": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 }
 
+var generatorMixType = [];
+function setTypes() {
 
-function generatePassword() {
+    var generatorSpecial = Math.floor(Math.random() * character.special.length);
+    var generatorNumeric = Math.floor(Math.random() * character.numeric.length);
+    var generatorUppercase = Math.floor(Math.random() * character.uppercase.length);
+    var generatorLowercase = Math.floor(Math.random() * character.lowercase.length);
 
-    //this holds the result generated
+    var s = character.special[generatorSpecial];
+    var n = character.numeric[generatorNumeric];
+    var u = character.uppercase[generatorUppercase];
+    var l = character.lowercase[generatorLowercase];
+
+
+    if (characterTypeSpecial) {
+        generatorMixType.push(s);
+    }
+    if (characterTypeNumeric) {
+        generatorMixType.push(n);
+    }
+    if (characterTypeUppercase) {
+        generatorMixType.push(u);
+    }
+    if (characterTypeLowercase) {
+        generatorMixType.push(l);
+    }
+    return generatorMixType;
+}
+
+
+
+
+function generatePassword(generatorMixType) {
     var result = '';
+
+
 
     for (var i = 0; i < passwordLengthInt; i++) {
 
-        var generatorSpecial = Math.floor(Math.random() * 28);
-        var generatorNumeric = Math.floor(Math.random() * 9);
-        var generatorUppercase = Math.floor(Math.random() * 25);
-        var generatorLowercase = Math.floor(Math.random() * 25);
 
 
-        var generatorMixType = [1, 2, 3, 4];
-
-        generatorMixType[1] = character.special[generatorSpecial];
-        generatorMixType[2] = character.numeric[generatorNumeric];
-        generatorMixType[3] = character.uppercase[generatorUppercase];
-        generatorMixType[4] = character.lowercase[generatorLowercase];
-    
-        
         var generatorMixRandom = generatorMixType[Math.floor(Math.random() * generatorMixType.length)];
-
-
-        console.log(generatorMixRandom.length);
-
+        console.log(generatorMixRandom);
 
 
 
@@ -55,54 +82,10 @@ function generatePassword() {
 
 // This replaces the placeholder text and puts the password in the html body
 function getPassword() {
-    document.getElementById("passwordHolder").innerHTML = generatePassword();
+    document.getElementById("passwordHolder").innerHTML = generatePassword(setTypes());
 }
 
-
-
-
-
-
-
-
-
-
-
-
-        // if(characterTypeSpecial === true) {
-        // generatorMixType[1] = character.special[generatorSpecial];
-        // }
-        // else {
-        //     generatorMixType[1] = 0;
-        // }
-
-        // if(characterTypeNumeric === true) {
-        // generatorMixType[2] = character.numeric[generatorNumeric];
-        // }
-        // else {
-        //     generatorMixType[2] = 0;
-        // }
-
-        // if(characterTypeUppercase === true) {
-        // generatorMixType[3] = character.uppercase[generatorUppercase];
-        // }
-        // else{
-        //     generatorMixType[3] = 0;
-        // }
-
-        // if(characterTypeLowercase === true) {
-        // generatorMixType[4] = character.lowercase[generatorLowercase];
-        // }
-        // else {
-        //     generatorMixType[4] = 0;
-        // }
-
-
-
-
-
-
-        // generatorMixType[1] = character.special[generatorSpecial];
-        // generatorMixType[2] = character.numeric[generatorNumeric];
-        // generatorMixType[3] = character.uppercase[generatorUppercase];
-        // generatorMixType[4] = character.lowercase[generatorLowercase];
+}
+else {
+    alert("Password must be between 8 and 128 characters, refresh the page to reset the program")
+}
