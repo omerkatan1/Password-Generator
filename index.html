@@ -16,6 +16,7 @@
         <h1>Password Generator</h1>
     </header>
 
+
     <div id="mainContentBox">
         <div id="mainContentBox-header">
             <h2>Generate a Password</h2>
@@ -25,15 +26,12 @@
         </div>
         <div id="mainContentBox-footer">
 
-            <button id="submitButton" onclick="getPassword(setTypes())">Generate Password</button>
-            <button id="copyButton">Copy to Clipboard</button>
+            <button id="submitButton" onclick="getPassword()">Generate Password</button>
+            <!-- getPassword(setTypes()) -->
+            <button id="copyButton" onclick="copyPassword('passwordHolder')">Copy to Clipboard</button>
 
         </div>
     </div>
-
-
-
-
 
 
     <!-- javascript file link -->
