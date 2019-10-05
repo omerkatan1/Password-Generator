@@ -83,12 +83,27 @@ else {
 
 // this uses the window object to get copy the passwordHolder ID to clipboard
 function copyPassword(passwordHolder) {
+    //Calls the password placeholder ID
     var getPassword = document.getElementById(passwordHolder);
+
+    //Adds a range so that it can select the password placeholder
     var range = document.createRange();
+
+    //Deletes the created range so that there wont be an empty range
     window.getSelection().removeAllRanges();
+
+    //sets the range of the range variable to be the password placeholder
     range.selectNode(getPassword);
+
+    //adds the var range as a range in the window
     window.getSelection().addRange(range);
+
+    //copies the new range
     document.execCommand('copy');
+
+    //removes the range once its copied to clipboard in order for the cycle to start all over again so the .execCommand wont copy more than one range
     window.getSelection().removeAllRanges();
+
+    //alerts the user that the password has been copied
     alert("Your Password has been copied");
 }
