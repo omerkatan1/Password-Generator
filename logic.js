@@ -1,37 +1,36 @@
-var passwordLength = prompt("Choose the length of your password");
-var passwordLengthInt = parseInt(passwordLength);
-
-
-// this if statement checks if the password prompted is between 8 and 128 characters
-if (passwordLengthInt >= 8 && passwordLengthInt <= 128) {
-
-
-    var characterTypeSpecial = confirm("Press OK if you would like any special characters in your password");
-    var characterTypeNumeric = confirm("Press OK if you would like any numbers in your password");
-    var characterTypeUppercase = confirm("Press OK if you would like any uppercase characters");
-    var characterTypeLowercase = confirm("Press OK if you would like any lowercase characters");
-
-
-    if (characterTypeSpecial === false && characterTypeNumeric === false && characterTypeUppercase === false && characterTypeLowercase === false) {
-        alert("You must choose at least one character type, refresh the page to reset the program");
-    }
-
-
-    var character = {
-        "special": ["!", "#", "$", "%", "&", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~"],
-        "numeric": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
-        "uppercase": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
-        "lowercase": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-    }
-
-
-    var generatorMixType = [];
-    var result = '';
 
 
 
-    function generatePassword() {
+var character = {
+    "special": ["!", "#", "$", "%", "&", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~"],
+    "numeric": ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+    "uppercase": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
+    "lowercase": ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+}
 
+
+var generatorMixType = [];
+var result = '';
+
+
+
+function generatePassword() {
+    result = '';
+    var passwordLength = prompt("Choose the length of your password");
+    var passwordLengthInt = parseInt(passwordLength);
+
+
+    // this if statement checks if the password prompted is between 8 and 128 characters
+    if (passwordLengthInt >= 8 && passwordLengthInt <= 128) {
+
+
+        var characterTypeSpecial = confirm("Press OK if you would like any special characters in your password");
+        var characterTypeNumeric = confirm("Press OK if you would like any numbers in your password");
+        var characterTypeUppercase = confirm("Press OK if you would like any uppercase characters");
+        var characterTypeLowercase = confirm("Press OK if you would like any lowercase characters");
+
+
+        //generates a new character until the password length has been reached
         for (var i = 0; i < passwordLengthInt; i++) {
             var generatorSpecial = Math.floor(Math.random() * character.special.length);
             var generatorNumeric = Math.floor(Math.random() * character.numeric.length);
@@ -63,23 +62,24 @@ if (passwordLengthInt >= 8 && passwordLengthInt <= 128) {
             result += mixArrayTypeString;
         }
 
-        return result;
+        //after loops runs it returns the password to the result variable
+        getPassword(result);
     }
 
 
-
-    // This replaces the placeholder text and puts the password in the html body
-    function getPassword() {
-        document.getElementById("passwordHolder").innerHTML = generatePassword();
-        result = '';
+    if (characterTypeSpecial === false && characterTypeNumeric === false && characterTypeUppercase === false && characterTypeLowercase === false) {
+        alert("You must choose at least one character type, refresh the page to reset the program");
     }
-
-
-}
-else {
-    alert("Password must be between 8 and 128 characters, refresh the page to reset the program")
+    if (passwordLengthInt <= 8 || passwordLengthInt >= 128) {
+        alert("Password must be between 8 and 128 characters, refresh the page to reset the program")
+    }
 }
 
+
+// This replaces the placeholder text and puts the password in the html body
+function getPassword(result) {
+    document.getElementById("passwordHolder").innerHTML = result;
+}
 
 // this uses the window object to get copy the passwordHolder ID to clipboard
 function copyPassword(passwordHolder) {
@@ -101,9 +101,9 @@ function copyPassword(passwordHolder) {
     //copies the new range
     document.execCommand('copy');
 
+    //alerts the user that the password has been copied
+    alert("Your Password has been copied: " + window.getSelection(range));
+
     //removes the range once its copied to clipboard in order for the cycle to start all over again so the .execCommand wont copy more than one range
     window.getSelection().removeAllRanges();
-
-    //alerts the user that the password has been copied
-    alert("Your Password has been copied");
 }
