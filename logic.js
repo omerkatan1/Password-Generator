@@ -9,7 +9,10 @@ var character = {
 }
 
 
+//this is the array that holds the randomized character types
 var generatorMixType = [];
+
+//this holds the password after it has been generated
 var result = '';
 
 
@@ -24,6 +27,7 @@ function generatePassword() {
     if (passwordLengthInt >= 8 && passwordLengthInt <= 128) {
 
 
+        //asks user what character types to add into the password
         var characterTypeSpecial = confirm("Press OK if you would like any special characters in your password");
         var characterTypeNumeric = confirm("Press OK if you would like any numbers in your password");
         var characterTypeUppercase = confirm("Press OK if you would like any uppercase characters");
@@ -43,6 +47,7 @@ function generatePassword() {
             var arrayLowercase = character.lowercase[generatorLowercase];
 
 
+            //pushes items to array if one of the character types is true
             if (characterTypeSpecial) {
                 generatorMixType.push(arraySpecial);
             }
