@@ -73,10 +73,10 @@ function generatePassword() {
 
 
     if (characterTypeSpecial === false && characterTypeNumeric === false && characterTypeUppercase === false && characterTypeLowercase === false) {
-        alert("You must choose at least one character type, refresh the page to reset the program");
+        alert("You must choose at least one character type");
     }
     if (passwordLengthInt <= 8 || passwordLengthInt >= 128) {
-        alert("Password must be between 8 and 128 characters, refresh the page to reset the program")
+        alert("Password must be between 8 and 128 characters")
     }
 }
 
