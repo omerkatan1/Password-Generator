@@ -9,15 +9,13 @@ var character = {
 }
 
 
-//this is the array that holds the randomized character types
-var generatorMixType = [];
-
-//this holds the password after it has been generated
-var result = '';
 
 
 
 function generatePassword() {
+    //this is the array that holds the randomized character types
+    var generatorMixType = [];
+
     result = '';
     var passwordLength = prompt("Choose the length of your password");
     var passwordLengthInt = parseInt(passwordLength);
@@ -65,6 +63,11 @@ function generatePassword() {
             var mixArrayTypeString = mixArrayType + '';
 
             result += mixArrayTypeString;
+
+            arraySpecial = '';
+            arrayNumeric = '';
+            arrayUppercase = '';
+            arrayLowercase = '';
         }
 
         //after loops runs it returns the password to the result variable
